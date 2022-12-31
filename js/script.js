@@ -106,7 +106,7 @@ const checkErr = (value) => {
 
 }
 
-const addEvents = () => {
+const initializBoard = () => {
     cells.forEach((cell, i) => {
         cell.addEventListener('click', () => {
             cells.forEach(e => e.classList.remove('selected', 'err', 'sameNumber', 'sameRegion'));
@@ -117,7 +117,9 @@ const addEvents = () => {
             heighlightNumber(cell.innerHTML);
         });
     });
+}
 
+const initializNum = () => {
     numbers.forEach((num, index) => {
         num.innerHTML = index + 1;
         num.addEventListener('click', () => {
@@ -135,7 +137,8 @@ const addEvents = () => {
 const startGame = () =>{
     addBorders()
     insertValues()
-    addEvents()
+    initializNum()
+    initializBoard()
 }
 startGame()
 erase.addEventListener('click', () => {
