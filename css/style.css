@@ -7,7 +7,7 @@
 }
 
 :root {
-    --wh: 32px;
+    --wh: 40px;
 }
 
 @media screen and (min-width:600px) {
