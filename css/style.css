@@ -5,7 +5,9 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+:root{
+    --wh:35px;
+}
 .main {
     display: flex;
     justify-content: center;
@@ -18,18 +20,19 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: calc(var(--wh) * 9);
 }
 
 .sudoku {
     display: grid;
-    grid-template-columns: repeat(9, 50px);
+    grid-template-columns: repeat(9, var(--wh));
     /* border: 1px solid #000; */
 }
 
 .cell,
 .number {
-    width: 35px;
-    height: 35px;
+    width: var(--wh);
+    height: var(--wh);
     border: 1px solid #d3d3d3;
     font-size: 30px;
     text-align: center;
@@ -74,11 +77,11 @@
 .numbers {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 25px;
 }
 
 .number {
-    width: 30px;
-    height: 30px;
     border: none;
     background-color: #f0f2f5;
 
@@ -93,8 +96,8 @@
 }
 
 #erase {
-    width: 30px;
-    height: 30px;
+    width:var(--wh);
+    height: var(--wh);
     border: none;
     font-size: 30px;
 }
