@@ -148,7 +148,7 @@ const startGame = () => {
 
 erase.addEventListener('click', () => {
     let cell = document.querySelector('.selected');
-    if (!cell.classList.contains("filled")) cell.innerHTML = "";
+    if (cell && !cell.classList.contains("filled")) cell.innerHTML = "";
 })
 
 hilightRegion.addEventListener('click', heighlightRegion);
