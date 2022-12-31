@@ -147,6 +147,7 @@ const startGame = () => {
 }
 
 erase.addEventListener('click', () => {
+    cells.forEach(e => e.classList.remove("err"));
     let cell = document.querySelector('.selected');
     if (cell && !cell.classList.contains("filled")) cell.innerHTML = "";
 })
