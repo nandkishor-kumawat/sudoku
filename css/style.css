@@ -5,9 +5,11 @@
     margin: 0;
     box-sizing: border-box;
 }
-:root{
-    --wh:35px;
+
+:root {
+    --wh: 35px;
 }
+
 .main {
     display: flex;
     justify-content: center;
@@ -75,10 +77,10 @@
 } */
 
 .numbers {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, var(--wh));
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 25px;
+    row-gap: 20px;
 }
 
 .number {
@@ -87,17 +89,19 @@
 
 }
 
+
+
+#erase {
+    width: var(--wh);
+    height: var(--wh);
+    border: none;
+    font-size: 30px;
+}
+
 .err {
     background-color: rgba(255, 0, 0, 0.384);
 }
 
 .wrong {
     color: red;
-}
-
-#erase {
-    width:var(--wh);
-    height: var(--wh);
-    border: none;
-    font-size: 30px;
 }
