@@ -6,11 +6,11 @@ let erase = document.getElementById("erase");
 let selected_cell = -1;
 
 cells.forEach((cell, index) => {
-    let width = "0.185rem"
-    if (index % 27 < 9) cell.style.borderTopWidth = width;
-    if (index % 9 == 0 || index % 9 == 3 || index % 9 == 6) cell.style.borderLeftWidth = width;
-    if (index % 9 == 8) cell.style.borderRightWidth = width;
-    if (index >= 72 && index <= 80) cell.style.borderBottomWidth = width;
+    let width = "0.185rem solid #000"
+    if (index % 27 < 9) cell.style.borderTop = width;
+    if (index % 9 == 0 || index % 9 == 3 || index % 9 == 6) cell.style.borderLeft = width;
+    if (index % 9 == 8) cell.style.borderRight = width;
+    if (index >= 72 && index <= 80) cell.style.borderBottom = width;
 })
 
 
@@ -114,9 +114,9 @@ numbers.forEach((num, index) => {
 });
 
 
-erase.addEventListener('click',()=>{
+erase.addEventListener('click', () => {
     let sel = document.querySelector('.selected');
-    if(!sel.classList.contains("filled")) sel.innerHTML = "";
+    if (!sel.classList.contains("filled")) sel.innerHTML = "";
 })
 
 printSudoku()
