@@ -1,11 +1,11 @@
 let cells = document.querySelectorAll('.cell');
 let numbers = document.querySelectorAll('.number');
 let erase = document.getElementById("erase");
+let resetBtn = document.getElementById("resetBtn");
 let hilightRegion = document.getElementById("hilightRegion");
 let hilightNumber = document.getElementById("hilightNumber");
-
-
 let selected_cell = -1;
+
 
 const addBorders = () => {
     cells.forEach((cell, index) => {
@@ -87,8 +87,8 @@ const checkErr = (value) => {
 
     const addErr = (cell) => {
         if (cell.innerHTML == value && !cell.classList.contains("selected")) {
-           cell.classList.add("err");
-           if(!cells[selected_cell].classList.contains("filled"))cells[selected_cell].classList.add("wrong");
+            cell.classList.add("err");
+            if (!cells[selected_cell].classList.contains("filled")) cells[selected_cell].classList.add("wrong");
         }
     }
 
@@ -106,19 +106,18 @@ const checkErr = (value) => {
 
 }
 
-const initializBoard = () => {
+const initializVal = () => {
     cells.forEach((cell, i) => {
         cell.addEventListener('click', () => {
             cells.forEach(e => e.classList.remove('selected', 'err', 'sameNumber', 'sameRegion'));
             selected_cell = i;
             cell.classList.add('selected');
-            if(cell.innerHTML!="")checkErr(cell.innerHTML);
+            if (cell.innerHTML != "") checkErr(cell.innerHTML);
             heighlightRegion();
             heighlightNumber(cell.innerHTML);
         });
     });
 }
-
 const initializNum = () => {
     numbers.forEach((num, index) => {
         num.innerHTML = index + 1;
@@ -134,13 +133,19 @@ const initializNum = () => {
 }
 
 
-const startGame = () =>{
+const startGame = () => {
+    cells.forEach((cell) => {
+        cell.innerHTML = "";
+        cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion','filled','wrong')
+    });
+    selected_cell = -1;
+
     addBorders()
     insertValues()
     initializNum()
-    initializBoard()
+    initializVal()
 }
-startGame()
+
 erase.addEventListener('click', () => {
     let cell = document.querySelector('.selected');
     if (!cell.classList.contains("filled")) cell.innerHTML = "";
@@ -148,4 +153,6 @@ erase.addEventListener('click', () => {
 
 hilightRegion.addEventListener('click', heighlightRegion);
 hilightNumber.addEventListener('click', heighlightNumber);
+resetBtn.addEventListener('click', startGame);
 
+startGame()
