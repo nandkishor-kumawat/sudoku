@@ -1,24 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="box">
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
-            <div class="box"><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/><input type="text" class="digit"/></div>
+    <div id="main" class="main">
+        <div class="sudoku">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+        <div class="numbers">
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
+            <div class="number"></div>
         </div>
     </div>
+
+
+
+    <script src="js/sudoku.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
