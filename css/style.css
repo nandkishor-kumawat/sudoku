@@ -1,4 +1,4 @@
-* {
+*, ::after,::before {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -10,6 +10,8 @@
     align-items: center;
     height: 100vh;
     flex-direction: column;
+    /* background-color: #16181e; */
+    /* color: #fff; */
 }
 
 .sudoku {
@@ -22,7 +24,7 @@
 .number {
     width: 40px;
     height: 40px;
-    border:1px solid #000;
+    border: 1px solid #fff;
     font-size: 30px;
     text-align: center;
     outline: none;
@@ -30,12 +32,30 @@
 
 }
 
-.filled{
+.filled {
     background-color: #e6c4c4;
 }
-.selected{
-    background-color: aquamarine;
+.sameRegion{
+    background-color: yellow;
 }
+.sameNumber{
+    background-color: aqua;
+}
+.selected {
+    background-color: aquamarine ;
+    position: relative;
+}
+
+/* .selected::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: .35rem solid red;
+} */
+
 .numbers {
     display: flex;
     margin: 10px;
@@ -44,6 +64,7 @@
 .err {
     background-color: rgba(255, 0, 0, 0.384);
 }
-.wrong{
+
+.wrong {
     color: red;
 }
