@@ -7,24 +7,24 @@
 }
 
 :root {
-    --wh: 38px;
+    --wh: 32px;
 }
 
 @media screen and (min-width:600px) {
     :root {
-        --wh: 43px;
+        --wh: 45px;
     }
 }
 
 @media screen and (min-width:900px) {
     :root {
-        --wh: 48px;
+        --wh: 50px;
     }
 }
 
 @media screen and (min-width:1280px) {
     :root {
-        --wh: 53px;
+        --wh: 55px;
     }
 }
 
@@ -53,7 +53,7 @@
 }
 
 
-.settings ul{
+.settings ul {
     list-style: none;
 }
 
@@ -128,8 +128,8 @@
     background-color: #f0f2f5;
     width: calc(var(--wh) - 5px);
     height: calc(var(--wh) - 5px);
-font-size: 25px;
-padding: 5px;
+    font-size: 25px;
+    padding: 5px;
 }
 
 .btn-container {
