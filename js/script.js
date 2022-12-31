@@ -4,15 +4,10 @@ let selected_cell = -1;
 
 
 cells.forEach((cell, index) => {
-    if (index % 27 < 9) {
-        cell.style.borderTop = '2px solid black';
-
-    }
-    if(index%9==0||index%9==3||index%9==6){
-        cell.style.borderLeft = '2px solid black';
-    }
-    if(index%9==8) cell.style.borderRight = '2px solid black';
-    if(index) cell.style.borderBottom = '2px solid black';
+    if (index % 27 < 9) cell.style.borderTop = '0.185rem solid black';
+    if (index % 9 == 0 || index % 9 == 3 || index % 9 == 6) cell.style.borderLeft = '0.185rem solid black';
+    if (index % 9 == 8) cell.style.borderRight = '0.185rem solid black';
+    if (index >= 72 && index <= 80) cell.style.borderBottom = '0.185rem solid black';
 })
 
 
