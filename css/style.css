@@ -45,6 +45,19 @@
     width: calc(var(--wh) * 9);
 }
 
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+}
+
+
+.settings ul{
+    list-style: none;
+}
+
+
 .sudoku {
     display: grid;
     grid-template-columns: repeat(9, var(--wh));
@@ -86,6 +99,14 @@
     color: #fff;
 }
 
+.err {
+    background-color: rgba(255, 0, 0, 0.384);
+}
+
+.wrong {
+    color: red;
+}
+
 /* .selected::after {
     content: "";
     position: absolute;
@@ -110,7 +131,10 @@
 
 }
 
-
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
 
 #erase {
     width: var(--wh);
@@ -119,10 +143,8 @@
     font-size: 30px;
 }
 
-.err {
-    background-color: rgba(255, 0, 0, 0.384);
-}
-
-.wrong {
-    color: red;
+#resetBtn {
+    border: none;
+    font-size: 30px;
+    padding: 6px 16px;
 }
