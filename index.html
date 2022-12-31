@@ -13,6 +13,23 @@
 <body>
     <div id="main" class="main">
         <div class="game-container">
+            <div class="game-info">
+                <div id="mode">Easy</div>
+                <!-- <div id="mistakes">mistakes: 3</div> -->
+                <div id="time">1:32</div>
+                <div class="settings">
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="hilightRegion" id="hilightRegion" checked>
+                            <label for="hilightRegion">hilightRegion</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="hilightNumber" id="hilightNumber" checked>
+                            <label for="hilightNumber">hilightNumber</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="sudoku">
                 <div class="cell"></div>
                 <div class="cell"></div>
@@ -107,8 +124,9 @@
                 <div class="number"></div>
                 <div class="number"></div>
             </div>
-            <div class="btn">
+            <div class="btn-container">
                 <button id="erase">x</button>
+                <button id="resetBtn">reset</button>
 
             </div>
         </div>
