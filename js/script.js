@@ -7,31 +7,26 @@ let hilightNumber = document.getElementById("hilightNumber");
 
 let selected_cell = -1;
 
-cells.forEach((cell, index) => {
-    let width = "0.185rem solid #000"
-    if (index % 27 < 9) cell.style.borderTop = width;
-    if (index % 9 == 0 || index % 9 == 3 || index % 9 == 6) cell.style.borderLeft = width;
-    if (index % 9 == 8) cell.style.borderRight = width;
-    if (index >= 72 && index <= 80) cell.style.borderBottom = width;
-})
+const addBorders = () => {
+    cells.forEach((cell, index) => {
+        let width = "0.185rem solid #000"
+        if (index % 27 < 9) cell.style.borderTop = width;
+        if (index % 9 == 0 || index % 9 == 3 || index % 9 == 6) cell.style.borderLeft = width;
+        if (index % 9 == 8) cell.style.borderRight = width;
+        if (index >= 72 && index <= 80) cell.style.borderBottom = width;
+    });
+}
 
-
-const printSudoku = () => {
-    let su = generateBoard();
+const insertValues = () => {
+    let s = generateBoard().b;
     for (let i = 0; i < cells.length; i++) {
         let row = Math.floor(i / size);
         let col = i % size;
 
-        if (su.b[row][col] !== 0) {
-            cells[i].innerHTML = su.b[row][col];
+        if (s[row][col] !== 0) {
+            cells[i].innerHTML = s[row][col];
             cells[i].classList.add('filled');
         }
-
-        // if (su.a[row][col] !== 0) {
-        //     cells[i].innerHTML = su.a[row][col];
-        //     cells[i].classList.add('filled');
-        // }
-
     }
 }
 
@@ -67,6 +62,23 @@ const heighlightNumber = (num) => {
     }
 }
 
+const isValidNum = () => {
+    let row = Math.floor(selected_cell / size);
+    let col = selected_cell % size;
+
+    for (let i = 0; i < i; i++) {
+        if (cells[9 * i + col].innerHTML == value) return false;
+        if (cells[9 * row + i].innerHTML == value) return false;
+    }
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].innerHTML == value) return false;
+        }
+    }
+    return true;
+}
+
 const checkErr = (value) => {
     cells.forEach(e => e.classList.remove("err"));
 
@@ -80,74 +92,56 @@ const checkErr = (value) => {
         }
     }
 
-    const isValid = () => {
-        for (let i = 0; i < i; i++) {
-            if (cells[9 * i + col].innerHTML == value) return false;
-            if (cells[9 * row + i].innerHTML == value) return false;
-        }
-
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].innerHTML == value) return false;
-            }
-        }
-        return true;
-    }
-
-    if (isValid) {
+    if (isValidNum) {
         cells[selected_cell].classList.remove("wrong");
     }
-
-
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             addErr(cells[9 * (3 * i + j) + col]);
             addErr(cells[9 * row + (3 * i + j)]);
             addErr(cells[9 * (row - row % 3 + i) + (col - col % 3 + j)]);
-
-            // if (addErr(cells[9 * (3 * i + j) + col])) cells[selected_cell].classList.remove("wrong");
-            // if (addErr(cells[9 * row + (3 * i + j)])) cells[selected_cell].classList.remove("wrong");
-            // if (addErr(cells[9 * (row - row % 3 + i) + (col - col % 3 + j)])) cells[selected_cell].classList.remove("wrong");
         }
     }
 
 }
 
-
-
-
-cells.forEach((cell, i) => {
-    cell.addEventListener('click', () => {
-        cells.forEach(e => e.classList.remove('selected', 'err', 'sameNumber', 'sameRegion'));
-
-        selected_cell = i;
-        console.log(i)
-        cell.classList.add('selected');
-        heighlightRegion();
-        heighlightNumber(cell.innerHTML);
-    });
-});
-
-numbers.forEach((num, index) => {
-    num.innerHTML = index + 1;
-    num.addEventListener('click', () => {
-        if (!cells[selected_cell].classList.contains('filled')) {
-            cells[selected_cell].innerHTML = index + 1;
-            checkErr(index + 1);
+const addEvents = () => {
+    cells.forEach((cell, i) => {
+        cell.addEventListener('click', () => {
+            cells.forEach(e => e.classList.remove('selected', 'err', 'sameNumber', 'sameRegion'));
+            selected_cell = i;
+            cell.classList.add('selected');
             heighlightRegion();
-            heighlightNumber(index + 1);
-        }
-    })
-});
+            heighlightNumber(cell.innerHTML);
+        });
+    });
+
+    numbers.forEach((num, index) => {
+        num.innerHTML = index + 1;
+        num.addEventListener('click', () => {
+            if (!cells[selected_cell].classList.contains('filled')) {
+                cells[selected_cell].innerHTML = index + 1;
+                checkErr(index + 1);
+                heighlightRegion();
+                heighlightNumber(index + 1);
+            }
+        })
+    });
+}
 
 
+const startGame = () =>{
+    addBorders()
+    insertValues()
+    addEvents()
+}
+startGame()
 erase.addEventListener('click', () => {
-    let sel = document.querySelector('.selected');
-    if (!sel.classList.contains("filled")) sel.innerHTML = "";
+    let cell = document.querySelector('.selected');
+    if (!cell.classList.contains("filled")) cell.innerHTML = "";
 })
 
 hilightRegion.addEventListener('click', heighlightRegion);
 hilightNumber.addEventListener('click', heighlightNumber);
 
-printSudoku();
