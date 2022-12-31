@@ -1,6 +1,8 @@
 let cells = document.querySelectorAll('.cell');
 let numbers = document.querySelectorAll('.number');
 let erase = document.getElementById("erase");
+let hilightRegion = document.getElementById("hilightRegion");
+let hilightNumber = document.getElementById("hilightNumber");
 
 
 let selected_cell = -1;
@@ -23,41 +25,43 @@ const printSudoku = () => {
         if (su.b[row][col] !== 0) {
             cells[i].innerHTML = su.b[row][col];
             cells[i].classList.add('filled');
-            cells[i].disabled = true;
         }
+
+        // if (su.a[row][col] !== 0) {
+        //     cells[i].innerHTML = su.a[row][col];
+        //     cells[i].classList.add('filled');
+        // }
 
     }
 }
 
 const heighlightRegion = () => {
-    let row = Math.floor(selected_cell / size);
-    let col = selected_cell % size;
+    cells.forEach(e => e.classList.remove('sameRegion'));
+    if (hilightRegion.checked) {
+        let row = Math.floor(selected_cell / size);
+        let col = selected_cell % size;
 
-    cells.forEach(e => e.classList.remove("sameRegion"));
+        for (let i = 0; i < 9; i++) {
+            cells[9 * i + col].classList.add("sameRegion")
+            cells[9 * row + i].classList.add("sameRegion")
+        }
 
-
-    for (let i = 0; i < 9; i++) {
-        cells[9 * i + col].classList.add("sameRegion")
-        cells[9 * row + i].classList.add("sameRegion")
-    }
-
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].classList.add("sameRegion")
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].classList.add("sameRegion")
+            }
         }
     }
 }
 
 const heighlightNumber = (num) => {
-    cells.forEach(e => e.classList.remove("sameNumber"));
-    if (num) {
-        for (let i = 0; i < size; i++) {
-            for (let j = 0; j < size; j++) {
-                let index = 9 * i + j;
-                if (cells[index].innerHTML == num) {
-                    cells[index].classList.add("sameNumber")
-                }
+    cells.forEach(e => e.classList.remove('sameNumber'));
+    if (typeof num == "object") num = cells[selected_cell].innerHTML;
 
+    if (num && hilightNumber.checked) {
+        for (let i = 0; i < size ** 2; i++) {
+            if (cells[i].innerHTML == num) {
+                cells[i].classList.add("sameNumber")
             }
         }
     }
@@ -72,20 +76,42 @@ const checkErr = (value) => {
     const addErr = (cell) => {
         if (cell.innerHTML == value && !cell.classList.contains("selected")) {
             cell.classList.add("err");
-            // cells[selected_cell].classList.add("wrong");
-        };
+            cells[selected_cell].classList.add("wrong");
+        }
     }
 
-    for (let i = 0; i < 9; i++) {
-        addErr(cells[9 * i + col])
-        addErr(cells[9 * row + i])
+    const isValid = () => {
+        for (let i = 0; i < i; i++) {
+            if (cells[9 * i + col].innerHTML == value) return false;
+            if (cells[9 * row + i].innerHTML == value) return false;
+        }
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].innerHTML == value) return false;
+            }
+        }
+        return true;
     }
+
+    if (isValid) {
+        cells[selected_cell].classList.remove("wrong");
+    }
+
+
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
+            addErr(cells[9 * (3 * i + j) + col]);
+            addErr(cells[9 * row + (3 * i + j)]);
             addErr(cells[9 * (row - row % 3 + i) + (col - col % 3 + j)]);
+
+            // if (addErr(cells[9 * (3 * i + j) + col])) cells[selected_cell].classList.remove("wrong");
+            // if (addErr(cells[9 * row + (3 * i + j)])) cells[selected_cell].classList.remove("wrong");
+            // if (addErr(cells[9 * (row - row % 3 + i) + (col - col % 3 + j)])) cells[selected_cell].classList.remove("wrong");
         }
     }
+
 }
 
 
@@ -93,8 +119,8 @@ const checkErr = (value) => {
 
 cells.forEach((cell, i) => {
     cell.addEventListener('click', () => {
-        cells.forEach(e => e.classList.remove('selected'));
-        cells.forEach(e => e.classList.remove("err"));
+        cells.forEach(e => e.classList.remove('selected', 'err', 'sameNumber', 'sameRegion'));
+
         selected_cell = i;
         console.log(i)
         cell.classList.add('selected');
@@ -108,7 +134,9 @@ numbers.forEach((num, index) => {
     num.addEventListener('click', () => {
         if (!cells[selected_cell].classList.contains('filled')) {
             cells[selected_cell].innerHTML = index + 1;
-            checkErr(index + 1)
+            checkErr(index + 1);
+            heighlightRegion();
+            heighlightNumber(index + 1);
         }
     })
 });
@@ -119,4 +147,7 @@ erase.addEventListener('click', () => {
     if (!sel.classList.contains("filled")) sel.innerHTML = "";
 })
 
-printSudoku()
+hilightRegion.addEventListener('click', heighlightRegion);
+hilightNumber.addEventListener('click', heighlightNumber);
+
+printSudoku();
