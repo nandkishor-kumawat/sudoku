@@ -10,6 +10,26 @@
     --wh: 35px;
 }
 
+@media screen and (min-width:600px) {
+    :root {
+        --wh: 40px;
+    }
+}
+
+@media screen and (min-width:900px) {
+    :root {
+        --wh: 45px;
+    }
+}
+
+@media screen and (min-width:1280px) {
+    :root {
+        --wh: 50px;
+    }
+}
+
+
+
 .main {
     display: flex;
     justify-content: center;
@@ -78,14 +98,15 @@
 
 .numbers {
     display: grid;
-    grid-template-columns: repeat(5, var(--wh));
+    grid-template-columns: repeat(9, calc(var(--wh) - 5px));
     justify-content: space-between;
-    row-gap: 20px;
 }
 
 .number {
     border: none;
     background-color: #f0f2f5;
+    width: calc(var(--wh) - 5px);
+    height: calc(var(--wh) - 5px);
 
 }
 
