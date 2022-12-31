@@ -87,8 +87,8 @@ const checkErr = (value) => {
 
     const addErr = (cell) => {
         if (cell.innerHTML == value && !cell.classList.contains("selected")) {
-            cell.classList.add("err");
-            cells[selected_cell].classList.add("wrong");
+           cell.classList.add("err");
+           if(!cells[selected_cell].classList.contains("filled"))cells[selected_cell].classList.add("wrong");
         }
     }
 
@@ -112,6 +112,7 @@ const addEvents = () => {
             cells.forEach(e => e.classList.remove('selected', 'err', 'sameNumber', 'sameRegion'));
             selected_cell = i;
             cell.classList.add('selected');
+            if(cell.innerHTML!="")checkErr(cell.innerHTML);
             heighlightRegion();
             heighlightNumber(cell.innerHTML);
         });
