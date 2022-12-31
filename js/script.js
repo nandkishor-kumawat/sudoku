@@ -74,7 +74,7 @@ const checkErr = (value) => {
     const addErr = (cell) => {
         if (cell.innerHTML == value && !cell.classList.contains("selected")) {
             cell.classList.add("err");
-            // cells[selected_cell].classList.add("wrong");
+            cells[selected_cell].classList.add("wrong");
         };
     }
 
