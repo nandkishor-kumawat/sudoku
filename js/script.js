@@ -1,7 +1,9 @@
 let cells = document.querySelectorAll('.cell');
 let numbers = document.querySelectorAll('.number');
-let selected_cell = -1;
+let erase = document.getElementById("erase");
 
+
+let selected_cell = -1;
 
 cells.forEach((cell, index) => {
     let width = "0.185rem"
@@ -10,10 +12,6 @@ cells.forEach((cell, index) => {
     if (index % 9 == 8) cell.style.borderRightWidth = width;
     if (index >= 72 && index <= 80) cell.style.borderBottomWidth = width;
 })
-
-
-
-
 
 
 const printSudoku = () => {
@@ -74,7 +72,7 @@ const checkErr = (value) => {
     const addErr = (cell) => {
         if (cell.innerHTML == value && !cell.classList.contains("selected")) {
             cell.classList.add("err");
-            cells[selected_cell].classList.add("wrong");
+            // cells[selected_cell].classList.add("wrong");
         };
     }
 
@@ -96,11 +94,12 @@ const checkErr = (value) => {
 cells.forEach((cell, i) => {
     cell.addEventListener('click', () => {
         cells.forEach(e => e.classList.remove('selected'));
+        cells.forEach(e => e.classList.remove("err"));
         selected_cell = i;
         console.log(i)
         cell.classList.add('selected');
         heighlightRegion();
-        heighlightNumber(cell.innerHTML)
+        heighlightNumber(cell.innerHTML);
     });
 });
 
@@ -113,5 +112,11 @@ numbers.forEach((num, index) => {
         }
     })
 });
+
+
+erase.addEventListener('click',()=>{
+    let sel = document.querySelector('.selected');
+    if(!sel.classList.contains("filled")) sel.innerHTML = "";
+})
 
 printSudoku()
