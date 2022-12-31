@@ -24,7 +24,7 @@
 .number {
     width: 40px;
     height: 40px;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     font-size: 30px;
     text-align: center;
     outline: none;
@@ -33,7 +33,7 @@
 }
 
 .filled {
-    background-color: #e6c4c4;
+    background-color: #e3e3e3;
 }
 .sameRegion{
     background-color: yellow;
