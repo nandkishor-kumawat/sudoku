@@ -30,7 +30,7 @@
 .number {
     width: 50px;
     height: 50px;
-    border: 1px solid #000;
+    border: 1px solid #d3d3d3;
     font-size: 30px;
     text-align: center;
     outline: none;
@@ -43,7 +43,7 @@
 
 
 .filled {
-    color: #6c6c6c;
+    color: #948383;
 }
 
 .sameRegion {
