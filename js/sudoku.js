@@ -80,15 +80,13 @@ const isFull = box => {
     });
 }
 
-const createSudoku = box => {
+const createSudokuBoard = box => {
     let emptyPos = new Array(2);
 
     if (!checkEmptySpace(box, emptyPos)) return true;
 
     let row = emptyPos[0],
         col = emptyPos[1];
-
-    let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     for (let i = 0; i < size; i++) {
         let n = Math.ceil(Math.random() * size);
@@ -97,7 +95,7 @@ const createSudoku = box => {
             if (isFull(box)) {
                 return true;
             }
-            if (createSudoku(box)) {
+            if (createSudokuBoard(box)) {
                 return true;
 
             }
@@ -112,16 +110,14 @@ const createSudoku = box => {
 
 const generateBoard = () => {
     let sudoku = newGrid(9);
-    let check = createSudoku(sudoku);
+    let check = createSudokuBoard(sudoku);
 
     if (check) {
         let arr = newGrid(9);
         for (let i = 0; i < size; i++) {
             for (let j = 0; j < size; j++) {
                 arr[i][j] = sudoku[i][j];
-                // main.innerHTML+=sudoku[i][j] +" ";
             }
-            // main.innerHTML+="<br>"
         }
 
         for (let i = 0; i < 30; i++) {
@@ -129,7 +125,7 @@ const generateBoard = () => {
             do {
                 row = Math.floor(Math.random() * size);
                 col = Math.floor(Math.random() * size);
-            } while (arr[row][col] == 0)
+            } while (arr[row][col] == 0);
             arr[row][col] = 0;
         }
         return {
