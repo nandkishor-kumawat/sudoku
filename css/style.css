@@ -4,6 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 :root {
@@ -143,7 +144,7 @@ svg.ham .bottom {
 #menu.active {
     height: 50px;
     width: 250px;
-    background: yellow;
+    background: #85ff00;
     position: absolute;
     top: 0;
     right: 0;
@@ -162,7 +163,7 @@ svg.ham .bottom {
 #menu.active #setting-item {
     display: block;
     position: absolute;
-    background: red;
+    background: #6edeff;
     top: 50px;
     right: 0;
     padding: 10px;
