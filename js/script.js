@@ -143,7 +143,7 @@ const initializNum = () => {
     numbers.forEach((num, index) => {
         num.innerHTML = index + 1;
         num.addEventListener('click', () => {
-            if (!cells[selected_cell].classList.contains('filled')) {
+            if (selected_cell !=-1 && !cells[selected_cell].classList.contains('filled')) {
                 cells[selected_cell].innerHTML = index + 1;
                 checkErr(index + 1);
                 heighlightRegion();
