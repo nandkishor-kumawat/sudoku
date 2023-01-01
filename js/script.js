@@ -2,7 +2,7 @@ let cells = document.querySelectorAll('.cell'),
     numbers = document.querySelectorAll('.number'),
     modes = document.querySelectorAll('.mode'),
     erase = document.getElementById("erase"),
-    timer = document.getElementById("timer"),
+    timeId = document.getElementById("timer"),
     resetBtn = document.getElementById("resetBtn"),
     startBtn = document.getElementById("startBtn"),
     newGameBtn = document.getElementById("newGameBtn"),
@@ -14,7 +14,9 @@ let cells = document.querySelectorAll('.cell'),
     selected_cell = -1,
     mode = "",
     time = 0,
-    timeId;
+    timer,
+    sudoku_q,
+    sudoku_a;
 
 modes.forEach(e => {
     e.addEventListener('click', () => {
@@ -39,13 +41,17 @@ const addBorders = () => {
 }
 
 const insertValues = (level) => {
-    let s = generateBoard(level).b;
+    let sdk = generateBoard(level);
+    sudoku_q = newGrid(size);
+    sudoku_a = sdk.a;
+    s = sdk.b;
     for (let i = 0; i < cells.length; i++) {
         let row = Math.floor(i / size);
         let col = i % size;
 
         if (s[row][col] !== 0) {
             cells[i].innerHTML = s[row][col];
+            sudoku_q[row][col] = s[row][col];
             cells[i].classList.add('filled');
         }
     }
@@ -85,9 +91,9 @@ const heighlightNumber = (num) => {
     }
 }
 
-const isValidNum = () => {
-    let row = Math.floor(selected_cell / size);
-    let col = selected_cell % size;
+const isValidNum = (selected = selected_cell, value) => {
+    let row = Math.floor(selected / size);
+    let col = selected % size;
 
     for (let i = 0; i < i; i++) {
         if (cells[9 * i + col].innerHTML == value) return false;
@@ -115,7 +121,7 @@ const checkErr = (value) => {
         }
     }
 
-    if (isValidNum) {
+    if (isValidNum(value)) {
         cells[selected_cell].classList.remove("wrong");
     }
 
@@ -128,6 +134,30 @@ const checkErr = (value) => {
     }
 
 }
+
+const isComplete = () => {
+    // let a = 0, b = 0;
+    // cells.forEach(cell => {
+    //     if (cell.classList.contains('err') || cell.classList.contains('wrong')) a++;
+    //     if (cell.innerHTML == "") b++;
+    // });
+
+    // return (a == 0 & b == 0);
+
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (sudoku_q[i][j] !== sudoku_a[i][j]) return false;
+        }
+    }
+    return true
+}
+
+const showResult = () => {
+    clearInterval(timer);
+    console.log('f')
+}
+
+
 
 const initializVal = () => {
     cells.forEach((cell, i) => {
@@ -148,9 +178,18 @@ const initializNum = () => {
         num.addEventListener('click', () => {
             if (selected_cell != -1 && !cells[selected_cell].classList.contains('filled')) {
                 cells[selected_cell].innerHTML = index + 1;
+
+                let row = Math.floor(selected_cell / size);
+                let col = selected_cell % size;
+                sudoku_q[row][col] = index + 1;
+
                 checkErr(index + 1);
                 heighlightRegion();
                 heighlightNumber(index + 1);
+
+                if (isComplete()) showResult();
+
+
             }
         });
     });
@@ -174,23 +213,24 @@ const findLevel = (val) => {
 }
 
 const resetBoard = () => {
+
     cells.forEach((cell) => {
         cell.innerHTML = "";
         cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion', 'filled', 'wrong');
     });
     selected_cell = -1;
     time = 0;
-    timer.innerHTML = "00:00"
-    clearInterval(timeId);
+    timeId.innerHTML = "00:00";
+    clearInterval(timer);
 }
 
 const updateTime = () => {
     time++;
-    let m = Math.floor(time/60);
-    let s = time%60;
-    m = (m<10)? "0"+m:m;
-    s= (s<10)?("0"+s):s;
-    timer.innerHTML = m +":"+s ;
+    let m = Math.floor(time / 60);
+    let s = time % 60;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? ("0" + s) : s;
+    timeId.innerHTML = m + ":" + s;
 }
 
 const startGame = (val) => {
@@ -200,7 +240,7 @@ const startGame = (val) => {
     initializNum();
     initializVal();
     document.getElementById("mode").innerHTML = mode;
-    timeId = setInterval(updateTime, 1000);
+    timer = setInterval(updateTime, 1000);
 }
 
 const resetGame = () => {
@@ -232,3 +272,4 @@ newGameBtn.addEventListener('click', () => {
 hilightRegion.addEventListener('click', heighlightRegion);
 hilightNumber.addEventListener('click', heighlightNumber);
 resetBtn.addEventListener('click', resetGame);
+resetGame()
