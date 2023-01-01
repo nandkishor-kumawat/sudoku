@@ -1,17 +1,20 @@
-let cells = document.querySelectorAll('.cell');
-let numbers = document.querySelectorAll('.number');
-let modes = document.querySelectorAll('.mode');
-let erase = document.getElementById("erase");
-let resetBtn = document.getElementById("resetBtn");
-let startBtn = document.getElementById("startBtn");
-let newGameBtn = document.getElementById("newGameBtn");
-let hilightRegion = document.getElementById("hilightRegion");
-let hilightNumber = document.getElementById("hilightNumber");
-let menu = document.querySelector('#menu');
-let startPage = document.querySelector('.start-page');
-let gameContainer = document.querySelector('.game-container');
-let selected_cell = -1;
-let mode = "";
+let cells = document.querySelectorAll('.cell'),
+    numbers = document.querySelectorAll('.number'),
+    modes = document.querySelectorAll('.mode'),
+    erase = document.getElementById("erase"),
+    timer = document.getElementById("timer"),
+    resetBtn = document.getElementById("resetBtn"),
+    startBtn = document.getElementById("startBtn"),
+    newGameBtn = document.getElementById("newGameBtn"),
+    hilightRegion = document.getElementById("hilightRegion"),
+    hilightNumber = document.getElementById("hilightNumber"),
+    menu = document.querySelector('#menu'),
+    startPage = document.querySelector('.start-page'),
+    gameContainer = document.querySelector('.game-container'),
+    selected_cell = -1,
+    mode = "",
+    time = 0,
+    timeId;
 
 modes.forEach(e => {
     e.addEventListener('click', () => {
@@ -143,7 +146,7 @@ const initializNum = () => {
     numbers.forEach((num, index) => {
         num.innerHTML = index + 1;
         num.addEventListener('click', () => {
-            if (selected_cell !=-1 && !cells[selected_cell].classList.contains('filled')) {
+            if (selected_cell != -1 && !cells[selected_cell].classList.contains('filled')) {
                 cells[selected_cell].innerHTML = index + 1;
                 checkErr(index + 1);
                 heighlightRegion();
@@ -153,29 +156,41 @@ const initializNum = () => {
     });
 }
 
-const findLevel = (val)=>{
+const findLevel = (val) => {
     switch (val) {
         case 'Easy':
             return 30 + Math.floor(Math.random() * 5);
-            
+
         case 'Medium':
             return 35 + Math.floor(Math.random() * 5);
-            
+
         case 'Hard':
             return 40 + Math.floor(Math.random() * 5);
-            
+
         case 'Expert':
             return 45 + Math.floor(Math.random() * 5);
-            
+
     }
 }
 
-const resetBoard=()=>{
+const resetBoard = () => {
     cells.forEach((cell) => {
         cell.innerHTML = "";
         cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion', 'filled', 'wrong');
     });
     selected_cell = -1;
+    time = 0;
+    timer.innerHTML = "00:00"
+    clearInterval(timeId);
+}
+
+const updateTime = () => {
+    time++;
+    let m = Math.floor(time/60);
+    let s = time%60;
+    m = (m<10)? "0"+m:m;
+    s= (s<10)?("0"+s):s;
+    timer.innerHTML = m +":"+s ;
 }
 
 const startGame = (val) => {
@@ -185,10 +200,11 @@ const startGame = (val) => {
     initializNum();
     initializVal();
     document.getElementById("mode").innerHTML = mode;
+    timeId = setInterval(updateTime, 1000);
 }
 
 const resetGame = () => {
-    resetBoard();
+    // resetBoard();
     startGame(mode);
 }
 
@@ -210,7 +226,7 @@ newGameBtn.addEventListener('click', () => {
     mode = "";
     document.getElementById('mode-name').innerHTML = "Choose dificulty level";
     startBtn.disabled = true;
-    resetBoard()
+    resetBoard();
 });
 
 hilightRegion.addEventListener('click', heighlightRegion);
