@@ -108,7 +108,7 @@ const createSudokuBoard = box => {
 }
 
 
-const generateBoard = () => {
+const generateBoard = (level) => {
     let sudoku = newGrid(9);
     let check = createSudokuBoard(sudoku);
 
@@ -120,7 +120,7 @@ const generateBoard = () => {
             }
         }
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < level; i++) {
             let row, col;
             do {
                 row = Math.floor(Math.random() * size);

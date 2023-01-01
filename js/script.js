@@ -1,11 +1,31 @@
 let cells = document.querySelectorAll('.cell');
 let numbers = document.querySelectorAll('.number');
+let modes = document.querySelectorAll('.mode');
 let erase = document.getElementById("erase");
 let resetBtn = document.getElementById("resetBtn");
+let startBtn = document.getElementById("startBtn");
 let hilightRegion = document.getElementById("hilightRegion");
 let hilightNumber = document.getElementById("hilightNumber");
+let settings = document.querySelector('.settings');
+let startPage = document.querySelector('.start-page');
+let gameContainer = document.querySelector('.game-container');
 let selected_cell = -1;
+let mode = "";
 
+
+modes.forEach(e => {
+    e.addEventListener('click', () => {
+        mode = e.value;
+        console.log(mode);
+        document.getElementById('mode-name').innerHTML = "Selected Mode: " + mode;
+        startBtn.disabled = false;
+        
+    })
+})
+
+settings.addEventListener('click', () => {
+    settings.classList.toggle('active');
+});
 
 const addBorders = () => {
     cells.forEach((cell, index) => {
@@ -17,8 +37,9 @@ const addBorders = () => {
     });
 }
 
-const insertValues = () => {
-    let s = generateBoard().b;
+const insertValues = (level) => {
+    console.log("level :", level)
+    let s = generateBoard(level).b;
     for (let i = 0; i < cells.length; i++) {
         let row = Math.floor(i / size);
         let col = i % size;
@@ -32,7 +53,7 @@ const insertValues = () => {
 
 const heighlightRegion = () => {
     cells.forEach(e => e.classList.remove('sameRegion'));
-    if (hilightRegion.checked) {
+    if (hilightRegion.checked && selected_cell != -1) {
         let row = Math.floor(selected_cell / size);
         let col = selected_cell % size;
 
@@ -51,12 +72,14 @@ const heighlightRegion = () => {
 
 const heighlightNumber = (num) => {
     cells.forEach(e => e.classList.remove('sameNumber'));
-    if (typeof num == "object") num = cells[selected_cell].innerHTML;
+    if (selected_cell != -1) {
+        if (typeof num == "object") num = cells[selected_cell].innerHTML;
 
-    if (num && hilightNumber.checked) {
-        for (let i = 0; i < size ** 2; i++) {
-            if (cells[i].innerHTML == num) {
-                cells[i].classList.add("sameNumber")
+        if (num && hilightNumber.checked) {
+            for (let i = 0; i < size ** 2; i++) {
+                if (cells[i].innerHTML == num) {
+                    cells[i].classList.add("sameNumber")
+                }
             }
         }
     }
@@ -118,6 +141,7 @@ const initializVal = () => {
         });
     });
 }
+
 const initializNum = () => {
     numbers.forEach((num, index) => {
         num.innerHTML = index + 1;
@@ -132,18 +156,38 @@ const initializNum = () => {
     });
 }
 
+const findLevel = (val)=>{
+    switch (val) {
+        case 'Easy':
+            return 30 + Math.floor(Math.random() * 5);
+            
+        case 'Medium':
+            return 35 + Math.floor(Math.random() * 5);
+            
+        case 'Hard':
+            return 40 + Math.floor(Math.random() * 5);
+            
+        case 'Expert':
+            return 45 + Math.floor(Math.random() * 5);
+            
+    }
+}
 
-const startGame = () => {
-    cells.forEach((cell) => {
-        cell.innerHTML = "";
-        cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion','filled','wrong')
-    });
-    selected_cell = -1;
-
+const startGame = (val) => {
+    // resetGame()
     addBorders()
-    insertValues()
+    insertValues(findLevel(val))
     initializNum()
     initializVal()
+}
+
+const resetGame = () => {
+    cells.forEach((cell) => {
+        cell.innerHTML = "";
+        cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion', 'filled', 'wrong')
+    });
+    selected_cell = -1;
+    startGame(mode)
 }
 
 erase.addEventListener('click', () => {
@@ -154,6 +198,13 @@ erase.addEventListener('click', () => {
 
 hilightRegion.addEventListener('click', heighlightRegion);
 hilightNumber.addEventListener('click', heighlightNumber);
-resetBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', resetGame);
 
-startGame()
+startBtn.addEventListener('click', () => {
+    startPage.style.display = "none";
+    gameContainer.style.display = "flex";
+    if (mode) startGame(mode);
+});
+
+
+// startGame()

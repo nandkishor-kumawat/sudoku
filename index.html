@@ -12,24 +12,56 @@
 
 <body>
     <div id="main" class="main">
+
+        <div class="start-page">
+            <div class="modes">
+                <p id="mode-name">Choose dificulty level</p>
+                <div class="mode-btns">
+                    <button class="mode" value="Easy">Easy</button>
+                    <button class="mode" value="Medium">Medium</button>
+                    <button class="mode" value="Hard">Hard</button>
+                    <button class="mode" value="Expert">Expert</button>
+                    <button id="startBtn" disabled>Start Game</button>
+                </div>
+            </div>
+
+          
+        </div>
+
         <div class="game-container">
             <div class="game-info">
                 <div id="mode">Easy</div>
                 <!-- <div id="mistakes">mistakes: 3</div> -->
-                <div id="time">1:32</div>
-                <div class="settings">
-                    <ul>
+                <div class="time-container">
+                    <p id="time">1:32</p>
+                    <p id="pauseStart"></p>
+                </div>
+                <div class="settings" id="menu">
+                    <svg class="ham" viewBox="0 0 100 100" width="50">
+                        <path class="top"
+                            d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272" />
+                        <path class="middle"
+                            d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272" />
+                        <path class="bottom"
+                            d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272" />
+                    </svg>
+
+                    <ul id="setting-item">
                         <li>
-                            <input type="checkbox" name="hilightRegion" id="hilightRegion" checked>
                             <label for="hilightRegion">hilightRegion</label>
+                            <input type="checkbox" name="hilightRegion" id="hilightRegion" checked>
                         </li>
                         <li>
-                            <input type="checkbox" name="hilightNumber" id="hilightNumber" checked>
                             <label for="hilightNumber">hilightNumber</label>
+                            <input type="checkbox" name="hilightNumber" id="hilightNumber" checked>
+                        </li>
+                        <li>
+                            <button>New Game</button>
                         </li>
                     </ul>
                 </div>
             </div>
+
             <div class="sudoku">
                 <div class="cell"></div>
                 <div class="cell"></div>
@@ -113,6 +145,11 @@
                 <div class="cell"></div>
                 <div class="cell"></div>
             </div>
+            <div class="btn-container">
+                <button id="erase">Clear</button>
+                <button id="resetBtn">Reset</button>
+
+            </div>
             <div class="numbers">
                 <div class="number"></div>
                 <div class="number"></div>
@@ -123,11 +160,6 @@
                 <div class="number"></div>
                 <div class="number"></div>
                 <div class="number"></div>
-            </div>
-            <div class="btn-container">
-                <button id="erase">Clear</button>
-                <button id="resetBtn">Reset</button>
-
             </div>
         </div>
     </div>

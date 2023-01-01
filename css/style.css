@@ -36,22 +36,137 @@
     flex-direction: column;
 }
 
+.start-page {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.modes {
+    color: rgb(82, 86, 86);
+    padding: 5px;
+}
+
+
+.mode-btns {
+    display: flex;
+    flex-direction: column;
+}
+
+.mode-btns button {
+    padding: 10px 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    background-color: #0d6efd;
+    border: none;
+    font-size: 1rem;
+    color: #fff;
+}
+
+
+.mode-btns .mode:focus {
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+
+}
+
 .game-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     width: calc(var(--wh) * 9);
+    display: none;
 }
 
 .game-info {
     display: flex;
     justify-content: space-between;
-    padding: 5px 10px;
+    align-items: center;
+    font-size: 1.4rem;
+    position: relative;
+    height: 50px;
+}
+
+.settings {
+    position: relative;
+}
+
+.settings.active {
+    width: 250px;
+    background: yellow;
+}
+
+svg.ham {
+    cursor: pointer;
+    margin-right: -10px;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    user-select: none;
+}
+
+#menu.active svg.ham {
+    position: absolute;
+    right: 10px;
+}
+
+svg.ham path {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: #000;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+}
+
+svg.ham .top {
+    stroke-dasharray: 40 172;
+}
+
+svg.ham .middle {
+    stroke-dasharray: 40 111;
+}
+
+svg.ham .bottom {
+    stroke-dasharray: 40 172;
+}
+
+#menu.active .ham .top {
+    stroke-dashoffset: -132px;
+}
+
+#menu.active .ham .middle {
+    stroke-dashoffset: -71px;
+}
+
+#menu.active .ham .bottom {
+    stroke-dashoffset: -132px;
+}
+
+#menu.active {
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#setting-item {
+    list-style: none;
+    display: none;
     font-size: 1rem;
 }
 
-.settings ul {
-    list-style: none;
+#setting-item li {
+    padding: 4px 8px;
+}
+
+#menu.active #setting-item {
+    display: block;
+    position: absolute;
+    background: red;
+    top: 50px;
+    right: 0;
+    padding: 10px;
+    width: 250px;
 }
 
 .sudoku {
@@ -78,7 +193,7 @@
 }
 
 .sameRegion {
-    background-color: #c6edef;
+    background-color: #eaf1f2;
 }
 
 .sameNumber {
@@ -118,6 +233,7 @@
 .btn-container {
     display: flex;
     justify-content: space-around;
+    margin: 20px 0;
 }
 
 .btn-container button {
