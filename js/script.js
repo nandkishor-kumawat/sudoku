@@ -7,7 +7,7 @@ let startBtn = document.getElementById("startBtn");
 let newGameBtn = document.getElementById("newGameBtn");
 let hilightRegion = document.getElementById("hilightRegion");
 let hilightNumber = document.getElementById("hilightNumber");
-let settings = document.querySelector('.settings');
+let menu = document.querySelector('#menu');
 let startPage = document.querySelector('.start-page');
 let gameContainer = document.querySelector('.game-container');
 let selected_cell = -1;
@@ -23,8 +23,8 @@ modes.forEach(e => {
     });
 });
 
-settings.addEventListener('click', () => {
-    settings.classList.toggle('active');
+menu.addEventListener('click', () => {
+    menu.classList.toggle('active');
 });
 
 const addBorders = () => {
@@ -215,6 +215,7 @@ newGameBtn.addEventListener('click', () => {
     gameContainer.style.display = "none";
     mode = "";
     document.getElementById('mode-name').innerHTML = "Choose dificulty level";
+    startBtn.disabled = true;
     resetBoard()
 });
 
