@@ -13,11 +13,9 @@ let gameContainer = document.querySelector('.game-container');
 let selected_cell = -1;
 let mode = "";
 
-
 modes.forEach(e => {
     e.addEventListener('click', () => {
         mode = e.value;
-        console.log(mode);
         document.getElementById('mode-name').innerHTML = "Selected Mode: " + mode;
         startBtn.disabled = false;
     });
@@ -38,7 +36,6 @@ const addBorders = () => {
 }
 
 const insertValues = (level) => {
-    console.log("level :", level)
     let s = generateBoard(level).b;
     for (let i = 0; i < cells.length; i++) {
         let row = Math.floor(i / size);
@@ -187,6 +184,7 @@ const startGame = (val) => {
     insertValues(findLevel(val));
     initializNum();
     initializVal();
+    document.getElementById("mode").innerHTML = mode;
 }
 
 const resetGame = () => {
@@ -199,10 +197,6 @@ erase.addEventListener('click', () => {
     let cell = document.querySelector('.selected');
     if (cell && !cell.classList.contains("filled")) cell.innerHTML = "";
 });
-
-hilightRegion.addEventListener('click', heighlightRegion);
-hilightNumber.addEventListener('click', heighlightNumber);
-resetBtn.addEventListener('click', resetGame);
 
 startBtn.addEventListener('click', () => {
     startPage.style.display = "none";
@@ -219,5 +213,6 @@ newGameBtn.addEventListener('click', () => {
     resetBoard()
 });
 
-
-// startGame()
+hilightRegion.addEventListener('click', heighlightRegion);
+hilightNumber.addEventListener('click', heighlightNumber);
+resetBtn.addEventListener('click', resetGame);
