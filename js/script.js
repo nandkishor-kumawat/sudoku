@@ -4,6 +4,7 @@ let modes = document.querySelectorAll('.mode');
 let erase = document.getElementById("erase");
 let resetBtn = document.getElementById("resetBtn");
 let startBtn = document.getElementById("startBtn");
+let newGameBtn = document.getElementById("newGameBtn");
 let hilightRegion = document.getElementById("hilightRegion");
 let hilightNumber = document.getElementById("hilightNumber");
 let settings = document.querySelector('.settings');
@@ -19,9 +20,8 @@ modes.forEach(e => {
         console.log(mode);
         document.getElementById('mode-name').innerHTML = "Selected Mode: " + mode;
         startBtn.disabled = false;
-        
-    })
-})
+    });
+});
 
 settings.addEventListener('click', () => {
     settings.classList.toggle('active');
@@ -58,13 +58,13 @@ const heighlightRegion = () => {
         let col = selected_cell % size;
 
         for (let i = 0; i < 9; i++) {
-            cells[9 * i + col].classList.add("sameRegion")
-            cells[9 * row + i].classList.add("sameRegion")
+            cells[9 * i + col].classList.add("sameRegion");
+            cells[9 * row + i].classList.add("sameRegion");
         }
 
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
-                cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].classList.add("sameRegion")
+                cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].classList.add("sameRegion");
             }
         }
     }
@@ -78,7 +78,7 @@ const heighlightNumber = (num) => {
         if (num && hilightNumber.checked) {
             for (let i = 0; i < size ** 2; i++) {
                 if (cells[i].innerHTML == num) {
-                    cells[i].classList.add("sameNumber")
+                    cells[i].classList.add("sameNumber");
                 }
             }
         }
@@ -152,7 +152,7 @@ const initializNum = () => {
                 heighlightRegion();
                 heighlightNumber(index + 1);
             }
-        })
+        });
     });
 }
 
@@ -173,28 +173,32 @@ const findLevel = (val)=>{
     }
 }
 
+const resetBoard=()=>{
+    cells.forEach((cell) => {
+        cell.innerHTML = "";
+        cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion', 'filled', 'wrong');
+    });
+    selected_cell = -1;
+}
+
 const startGame = (val) => {
-    // resetGame()
-    addBorders()
-    insertValues(findLevel(val))
-    initializNum()
-    initializVal()
+    resetBoard();
+    addBorders();
+    insertValues(findLevel(val));
+    initializNum();
+    initializVal();
 }
 
 const resetGame = () => {
-    cells.forEach((cell) => {
-        cell.innerHTML = "";
-        cell.classList.remove('selected', 'err', 'sameNumber', 'sameRegion', 'filled', 'wrong')
-    });
-    selected_cell = -1;
-    startGame(mode)
+    resetBoard();
+    startGame(mode);
 }
 
 erase.addEventListener('click', () => {
     cells.forEach(e => e.classList.remove("err"));
     let cell = document.querySelector('.selected');
     if (cell && !cell.classList.contains("filled")) cell.innerHTML = "";
-})
+});
 
 hilightRegion.addEventListener('click', heighlightRegion);
 hilightNumber.addEventListener('click', heighlightNumber);
@@ -204,6 +208,14 @@ startBtn.addEventListener('click', () => {
     startPage.style.display = "none";
     gameContainer.style.display = "flex";
     if (mode) startGame(mode);
+});
+
+newGameBtn.addEventListener('click', () => {
+    startPage.style.display = "flex";
+    gameContainer.style.display = "none";
+    mode = "";
+    document.getElementById('mode-name').innerHTML = "Choose dificulty level";
+    resetBoard()
 });
 
 
