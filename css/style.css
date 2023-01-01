@@ -52,7 +52,8 @@
     flex-direction: column;
 }
 
-.mode-btns button,#newGameBtn {
+.mode-btns button,
+#newGameBtn {
     padding: 10px 16px;
     margin: 5px 0;
     cursor: pointer;
@@ -60,6 +61,10 @@
     border: none;
     font-size: 1rem;
     color: #fff;
+}
+
+.mode-btns button:disabled {
+    opacity: 0.5;
 }
 
 .mode-btns .mode:focus {
@@ -169,16 +174,14 @@ svg.ham .bottom {
     grid-template-columns: repeat(9, var(--wh));
 }
 
-.cell,
-.number {
+
+.cell {
+    display: flex;
     width: var(--wh);
     height: var(--wh);
-    border: 1px solid #d3d3d3;
     font-size: 30px;
-    text-align: center;
-    outline: none;
+    border: 1px solid #d3d3d3;
     cursor: pointer;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -223,6 +226,10 @@ svg.ham .bottom {
     font-size: 25px;
     padding: 5px;
     border-radius: 6px;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-container {
