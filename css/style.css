@@ -47,13 +47,12 @@
     padding: 5px;
 }
 
-
 .mode-btns {
     display: flex;
     flex-direction: column;
 }
 
-.mode-btns button {
+.mode-btns button,#newGameBtn {
     padding: 10px 16px;
     margin: 5px 0;
     cursor: pointer;
@@ -62,7 +61,6 @@
     font-size: 1rem;
     color: #fff;
 }
-
 
 .mode-btns .mode:focus {
     color: #fff;
@@ -88,13 +86,8 @@
     height: 50px;
 }
 
-.settings {
+#menu {
     position: relative;
-}
-
-.settings.active {
-    width: 250px;
-    background: yellow;
 }
 
 svg.ham {
@@ -144,6 +137,8 @@ svg.ham .bottom {
 
 #menu.active {
     height: 50px;
+    width: 250px;
+    background: yellow;
     position: absolute;
     top: 0;
     right: 0;
