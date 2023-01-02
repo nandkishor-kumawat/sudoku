@@ -225,12 +225,12 @@ const resetBoard = () => {
 }
 
 const updateTime = () => {
-    time++;
     let m = Math.floor(time / 60);
     let s = time % 60;
     m = (m < 10) ? "0" + m : m;
     s = (s < 10) ? ("0" + s) : s;
     timeId.innerHTML = m + ":" + s;
+    time++;
 }
 
 const startGame = (val) => {
