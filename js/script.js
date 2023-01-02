@@ -240,6 +240,7 @@ const startGame = (val) => {
     initializNum();
     initializVal();
     document.getElementById("mode").innerHTML = mode;
+    updateTime();
     timer = setInterval(updateTime, 1000);
 }
 
