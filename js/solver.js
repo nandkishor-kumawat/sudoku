@@ -23,7 +23,6 @@ numbers.forEach((num, index) => {
         let row = Math.floor(selected_cell / size);
         let col = selected_cell % size;
         sq[row][col] = index + 1;
-        console.log(sq)
     });
 });
 
