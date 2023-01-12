@@ -8,24 +8,24 @@
 }
 
 :root {
-    --wh: 40px;
+    --wh: 35px;
 }
 
 @media screen and (min-width:600px) {
     :root {
-        --wh: 45px;
+        --wh: 40px;
     }
 }
 
 @media screen and (min-width:900px) {
     :root {
-        --wh: 50px;
+        --wh: 45px;
     }
 }
 
 @media screen and (min-width:1280px) {
     :root {
-        --wh: 55px;
+        --wh: 50px;
     }
 }
 
