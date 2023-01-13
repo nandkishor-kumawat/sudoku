@@ -13,41 +13,51 @@ const newGrid = size => {
     return arr;
 }
 
-const isColSafe = (box, col, num) => {
-    for (let row = 0; row < size; row++) {
-        if (box[row][col] == num) return false;
-    }
-    return true;
-}
+// const isColSafe = (box, col, num) => {
+//     for (let row = 0; row < size; row++) {
+//         if (box[row][col] == num) return false;
+//     }
+//     return true;
+// }
 
-const isRowSafe = (box, row, num) => {
-    for (let col = 0; col < size; col++) {
-        if (box[row][col] == num) return false;
-    }
-    return true;
-}
+// const isRowSafe = (box, row, num) => {
+//     for (let col = 0; col < size; col++) {
+//         if (box[row][col] == num) return false;
+//     }
+//     return true;
+// }
 
-const isBoxSafe = (box, i, j, num) => {
-    for (let row = 0; row < 3; row++) {
-        for (let col = 0; col < 3; col++) {
-            if (box[row + i][col + j] == num) return false;
+// const isBoxSafe = (box, i, j, num) => {
+//     for (let row = 0; row < 3; row++) {
+//         for (let col = 0; col < 3; col++) {
+//             if (box[row + i][col + j] == num) return false;
+//         }
+//     }
+//     return true;
+// }
+
+// const isSafe = (grid, row, col, value) => {
+//     return isColSafe(grid, col, value) && isRowSafe(grid, row, value) && isBoxSafe(grid, row - row % 3, col - col % 3, value) && value !== 0;
+// }
+
+const isSafe = (board, row, col, k) => {
+    for (let i = 0; i < 9; i++) {
+        const m = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+        const n = 3 * Math.floor(col / 3) + i % 3;
+        if (board[row][i] == k || board[i][col] == k || board[m][n] == k) {
+            return false;
         }
     }
     return true;
 }
 
-const isSafe = (grid, row, col, value) => {
-    return isColSafe(grid, col, value) && isRowSafe(grid, row, value) && isBoxSafe(grid, row - row % 3, col - col % 3, value) && value !== 0;
-}
-
-
 // const isSafe = (box, row, col, num)=>{
- 
+
 //         for (let i = 0; i < size; i++) {
 //             if (box[i][col] == num) return false;
 //             if (box[row][i] == num) return false;
 //         }
- 
+
 //         for (let i = 0; i < 3; i++) {
 //             for (let j = 0; j < 3; j++) {
 //                 if (box[i + row - row % 3][j + col - col % 3] == num) return false;
