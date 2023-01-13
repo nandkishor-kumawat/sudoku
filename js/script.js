@@ -91,22 +91,33 @@ const heighlightNumber = (num) => {
     }
 }
 
-const isValidNum = (selected = selected_cell, value) => {
-    let row = Math.floor(selected / size);
-    let col = selected % size;
+// const isValidNum = (selected = selected_cell, value) => {
+//     let row = Math.floor(selected / size);
+//     let col = selected % size;
 
-    for (let i = 0; i < i; i++) {
-        if (cells[9 * i + col].innerHTML == value) return false;
-        if (cells[9 * row + i].innerHTML == value) return false;
-    }
+//     for (let i = 0; i < 9; i++) {
+//         if (cells[9 * i + col].innerHTML == value) return false;
+//         if (cells[9 * row + i].innerHTML == value) return false;
+//     }
 
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            if (cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].innerHTML == value) return false;
-        }
-    }
-    return true;
-}
+//     for (let i = 0; i < 3; i++) {
+//         for (let j = 0; j < 3; j++) {
+//             if (cells[9 * (row - row % 3 + i) + (col - col % 3 + j)].innerHTML == value) return false;
+//         }
+//     }
+//     return true;
+// }
+
+// function isValid(board, row, col, k) {
+//     for (let i = 0; i < 9; i++) {
+//         const m = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+//         const n = 3 * Math.floor(col / 3) + i % 3;
+//         if (board[row][i] == k || board[i][col] == k || board[m][n] == k) {
+//           return false;
+//         }
+//     }
+//     return true;
+// }
 
 const checkErr = (value) => {
     cells.forEach(e => e.classList.remove("err"));
@@ -121,10 +132,13 @@ const checkErr = (value) => {
         }
     }
 
-    if (isValidNum(value)) {
+    // if (isValidNum(value)) {
         cells[selected_cell].classList.remove("wrong");
-    }
-
+    // }
+    // if (isSafe(sudoku_q,row,col,value)) {
+    //     cells[selected_cell].classList.remove("wrong");
+    // }
+    // console.log(isValidNum(value))
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             addErr(cells[9 * (3 * i + j) + col]);
